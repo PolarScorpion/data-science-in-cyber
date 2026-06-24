@@ -38,6 +38,7 @@ temp/
 # Large datasets and serialized artifacts
 data/raw/
 data/external/
+data/processed/
 *.zip
 *.7z
 *.tar
@@ -62,4 +63,3 @@ models/
 .DS_Store
 Thumbs.db
 Desktop.ini
-
