@@ -21,6 +21,8 @@ The project is limited to the simulated-data portions of Chapters 3-5: transacti
 
 The research question is whether the handbook's conclusions about temporal validation, metric choice, and behavioral feature engineering remain supported under its simulated fraud scenarios, and how far those conclusions extend beyond data produced under known fraud rules.
 
+Phase 4 adds reproducible exploratory analysis and saved figures. No predictive model has been trained.
+
 ## Repository structure
 
 ```text
