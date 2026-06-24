@@ -1,0 +1,65 @@
+# Local project tooling
+.codex/
+.agents/
+work/
+outputs/
+
+# Python environments and caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs and temporary files
+logs/
+*.log
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+# Local secrets and configuration
+.env
+.env.*
+!.env.example
+
+# Large datasets and serialized artifacts
+data/raw/
+data/external/
+*.zip
+*.7z
+*.tar
+*.gz
+*.bz2
+*.xz
+*.parquet
+*.feather
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.hdf5
+models/
+
+# IDE settings
+.idea/
+.vscode/
+*.code-workspace
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
