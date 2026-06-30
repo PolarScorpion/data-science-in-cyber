@@ -1,0 +1,4 @@
+model,threshold,threshold_source,validation_precision,validation_recall,validation_f1
+no_fraud_prior,0.5,fixed no-fraud decision threshold,0.0,0.0,0.0
+logistic_regression,0.8634220086997121,max validation F1,0.9520348837209303,0.2117000646412411,0.3463775780010577
+hist_gradient_boosting,0.9901019125241544,max validation F1,0.48669467787114845,0.224628312863607,0.3073861123396727
