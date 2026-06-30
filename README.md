@@ -1,6 +1,6 @@
 # Data Science in Cybersecurity Final Project
 
-This repository contains a critical reproduction study of machine-learning methods for payment-card fraud detection. No experimental results are claimed yet.
+This repository contains a critical reproduction study of machine-learning methods for payment-card fraud detection using the Fraud Detection Handbook simulated transaction data.
 
 ## Selected source
 
@@ -21,7 +21,18 @@ The project is limited to the simulated-data portions of Chapters 3-5: transacti
 
 The research question is whether the handbook's conclusions about temporal validation, metric choice, and behavioral feature engineering remain supported under its simulated fraud scenarios, and how far those conclusions extend beyond data produced under known fraud rules.
 
-Phase 6 adds leakage-safe behavioral feature engineering for customer and terminal histories, compares those features with the Phase 5 baseline models, and separates conservative unlabeled histories from prior-label histories that require a stronger operational assumption.
+The completed analysis compares Phase 5 baseline models with Phase 6 leakage-safe behavioral features. The final synthesis distinguishes internal reproducibility on the simulated benchmark from external validity in real payment systems.
+
+Main result: unlabeled behavioral histories provide a modest improvement over the baseline, while prior fraud-label histories provide a much larger improvement under the strong assumption that earlier fraud labels are already known at scoring time. The project does not claim production readiness or real-world fraud performance.
+
+## Main reports
+
+- [Source selection](reports/source_selection.md)
+- [Reproducibility audit](reports/reproducibility_audit.md)
+- [EDA findings](reports/eda_findings.md)
+- [Baseline modeling](reports/baseline_modeling.md)
+- [Behavioral features](reports/behavioral_features.md)
+- [Final synthesis](reports/final_synthesis.md)
 
 ## Repository structure
 
