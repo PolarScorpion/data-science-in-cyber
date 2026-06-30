@@ -21,7 +21,7 @@ The project is limited to the simulated-data portions of Chapters 3-5: transacti
 
 The research question is whether the handbook's conclusions about temporal validation, metric choice, and behavioral feature engineering remain supported under its simulated fraud scenarios, and how far those conclusions extend beyond data produced under known fraud rules.
 
-Phase 5 adds leakage-controlled baseline fraud modeling with a chronological train/validation/test split, class-imbalance-aware metrics, and lightweight saved metric tables and figures. It does not yet implement behavioral customer or terminal features.
+Phase 6 adds leakage-safe behavioral feature engineering for customer and terminal histories, compares those features with the Phase 5 baseline models, and separates conservative unlabeled histories from prior-label histories that require a stronger operational assumption.
 
 ## Repository structure
 

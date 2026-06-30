@@ -1,0 +1,3 @@
+feature_set,include_past_fraud_labels,operational_assumption
+behavior_unlabeled,False,"Uses only prior transaction amounts, timestamps, customers, terminals, and customer-terminal interactions."
+behavior_label_history,True,Adds prior fraud-label counts and rates. This assumes earlier fraud labels are already known when a later transaction is scored.

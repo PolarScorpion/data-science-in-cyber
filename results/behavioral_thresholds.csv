@@ -1,0 +1,10 @@
+feature_set,model,threshold,threshold_source,validation_precision,validation_recall,validation_f1
+phase5_baseline,no_fraud_prior,0.5,fixed no-fraud decision threshold,0.0,0.0,0.0
+phase5_baseline,logistic_regression,0.8634220086997121,max validation F1,0.9520348837209303,0.2117000646412411,0.3463775780010577
+phase5_baseline,hist_gradient_boosting,0.9901019125241544,max validation F1,0.48669467787114845,0.224628312863607,0.3073861123396727
+behavior_unlabeled,no_fraud_prior,0.5,fixed no-fraud decision threshold,0.0,0.0,0.0
+behavior_unlabeled,logistic_regression,0.8799751490462265,max validation F1,0.5482423335826477,0.23691014867485455,0.330850823741819
+behavior_unlabeled,hist_gradient_boosting,0.8450057146377485,max validation F1,0.5472127417519909,0.31092436974789917,0.3965375103050289
+behavior_label_history,no_fraud_prior,0.5,fixed no-fraud decision threshold,0.0,0.0,0.0
+behavior_label_history,logistic_regression,0.9974374558359212,max validation F1,0.8275346053123831,0.7149321266968326,0.767123287671233
+behavior_label_history,hist_gradient_boosting,0.9777063408631064,max validation F1,0.8665461121157324,0.7744020685197156,0.8178870114353987
