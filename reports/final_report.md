@@ -45,7 +45,7 @@ customer and terminal aggregates are not used.
 ## Main result
 
 | Feature set | Best model | AP / PR-AUC | ROC-AUC | Precision | Recall | F1 |
-|---|---|---:|---:|---:|---:|---:|
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
 | Phase 5 baseline | Logistic regression | 0.245 | 0.644 | 0.940 | 0.211 | 0.345 |
 | Phase 6 unlabeled behavioral features | Histogram gradient boosting | 0.257 | 0.658 | 0.561 | 0.289 | 0.381 |
 | Phase 6 prior-label behavioral features | Histogram gradient boosting | 0.870 | 0.988 | 0.890 | 0.774 | 0.828 |

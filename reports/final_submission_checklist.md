@@ -11,7 +11,7 @@
 ## Commits included before this checklist
 
 | Commit | Purpose |
-|---|---|
+| --- | --- |
 | `8ed842f` | Initial license commit |
 | `eb70617` | Project scaffold |
 | `a982ae5` | Source selection and reproducibility audit |
