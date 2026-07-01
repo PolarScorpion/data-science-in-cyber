@@ -4,7 +4,8 @@
 
 - Branch: `cyber-final-project`
 - Pre-audit latest commit: `8c94154 docs: add final project synthesis`
-- Relationship to remote before this cleanup: ahead of `origin/cyber-final-project` by 3 commits and not behind
+- Relationship to remote before this cleanup:
+  ahead of `origin/cyber-final-project` by 3 commits and not behind
 - Working tree before this cleanup: clean
 
 ## Commits included before this checklist
@@ -22,7 +23,9 @@
 
 ## Checks passed
 
-- README includes project goal, dataset source, setup instructions, run instructions, expected outputs, phase summary, main result table, project structure, reports, and limitations.
+- README includes project goal, dataset source, setup instructions, run
+  instructions, expected outputs, phase summary, main result table, project
+  structure, reports, and limitations.
 - Raw data are documented as local-only under `data/raw/simulated-data-raw/`.
 - Notebook headings are coherent and numbered from 1 through 42.
 - The notebook parses successfully.
@@ -30,7 +33,8 @@
 - Installed packages pass `python -m pip check`.
 - Local README and report links resolve to existing files.
 - Referenced result tables and figures exist.
-- Raw data, local environments, fitted model binaries, sensitive files, and private files are not tracked.
+- Raw data, local environments, fitted model binaries, sensitive files, and
+  private files are not tracked.
 
 ## Known limitations retained
 

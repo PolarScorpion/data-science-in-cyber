@@ -2,9 +2,14 @@
 
 ## Project goal
 
-This repository is a critical reproduction study of machine-learning methods for payment-card fraud detection using the Fraud Detection Handbook simulated transaction data.
+This repository is a critical reproduction study of machine-learning methods for
+payment-card fraud detection using the Fraud Detection Handbook simulated
+transaction data.
 
-The project asks whether conclusions about temporal validation, metric choice, and behavioral feature engineering remain supported under the handbook's simulated fraud scenarios, and how far those conclusions can generalize beyond data produced by known simulation rules.
+The project asks whether conclusions about temporal validation, metric choice,
+and behavioral feature engineering remain supported under the handbook's
+simulated fraud scenarios, and how far those conclusions can generalize beyond
+data produced by known simulation rules.
 
 The project does not claim production readiness or real-world fraud performance.
 
@@ -15,11 +20,15 @@ The project does not claim production readiness or real-world fraud performance.
 - Raw simulated transactions: <https://github.com/Fraud-Detection-Handbook/simulated-data-raw>
 - Public transformed transactions used by the handbook notebooks: <https://github.com/Fraud-Detection-Handbook/simulated-data-transformed>
 
-The analysis is limited to the simulated-data portions of Chapters 3-5: transaction simulation, baseline modeling, temporal validation, performance metrics, and behavioral feature engineering.
+The analysis is limited to the simulated-data portions of Chapters 3-5:
+transaction simulation, baseline modeling, temporal validation, performance
+metrics, and behavioral feature engineering.
 
 ## Main result
 
-The final test period contains 345,144 transactions and 3,091 fraud cases, for 0.896% fraud prevalence. Average Precision / PR-AUC is the main ranking metric because accuracy is misleading under this class imbalance.
+The final test period contains 345,144 transactions and 3,091 fraud cases, for
+0.896% fraud prevalence. Average Precision / PR-AUC is the main ranking metric
+because accuracy is misleading under this class imbalance.
 
 | Feature set | Best model | AP / PR-AUC | ROC-AUC | Precision | Recall | F1 |
 |---|---|---:|---:|---:|---:|---:|
@@ -27,7 +36,9 @@ The final test period contains 345,144 transactions and 3,091 fraud cases, for 0
 | Phase 6 unlabeled behavioral features | Histogram gradient boosting | 0.257 | 0.658 | 0.561 | 0.289 | 0.381 |
 | Phase 6 prior-label behavioral features | Histogram gradient boosting | 0.870 | 0.988 | 0.890 | 0.774 | 0.828 |
 
-Unlabeled behavioral histories provide a modest improvement over the baseline. Prior-label histories provide a much larger improvement, but only under the strong assumption that earlier fraud labels are known at scoring time.
+Unlabeled behavioral histories provide a modest improvement over the baseline.
+Prior-label histories provide a much larger improvement, but only under the
+strong assumption that earlier fraud labels are known at scoring time.
 
 ## Reproducibility
 
@@ -61,7 +72,12 @@ data/
 
 The raw data directory is ignored by Git and must remain untracked.
 
-To run the full analysis, open [notebooks/main_analysis.ipynb](notebooks/main_analysis.ipynb), select the project virtual environment as the kernel, and run the notebook from top to bottom. The notebook loads the local raw pickles, reproduces the EDA, trains the baseline and behavioral-feature models, saves small metric tables, and regenerates figures.
+To run the full analysis, open
+[notebooks/main_analysis.ipynb](notebooks/main_analysis.ipynb), select the
+project virtual environment as the kernel, and run the notebook from top to
+bottom. The notebook loads the local raw pickles, reproduces the EDA, trains
+the baseline and behavioral-feature models, saves small metric tables, and
+regenerates figures.
 
 Useful validation commands:
 
@@ -123,4 +139,8 @@ No fitted model binaries are required for the submitted analysis.
 
 ## Limitations
 
-The dataset is synthetic, so strong results may partly reflect recovery of simulator rules. Prior fraud-label features depend on timely label availability, which may not hold in production. The project does not model delayed labels, calibration, drift monitoring, retraining policy, review-budget constraints, customer impact, or deployment security controls.
+The dataset is synthetic, so strong results may partly reflect recovery of
+simulator rules. Prior fraud-label features depend on timely label
+availability, which may not hold in production. The project does not model
+delayed labels, calibration, drift monitoring, retraining policy,
+review-budget constraints, customer impact, or deployment security controls.
