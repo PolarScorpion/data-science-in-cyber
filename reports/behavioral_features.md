@@ -18,9 +18,9 @@ Validation is used for threshold selection only. Test metrics are computed on th
 
 ## Feature sets
 
-The Phase 5 baseline contains transaction amount, log amount, cyclic hour-of-day encodings, and cyclic day-of-week encodings.
+The baseline transaction/time feature set from Phase 5 contains transaction amount, log amount, cyclic hour-of-day encodings, and cyclic day-of-week encodings.
 
-The Phase 6 unlabeled behavioral feature set adds:
+The past-only behavioral feature set from Phase 6 adds:
 
 - customer prior transaction count,
 - customer prior mean, median, and standard deviation of amount,
@@ -53,12 +53,12 @@ The direct leakage fields `TX_FRAUD` and `TX_FRAUD_SCENARIO` are not predictors.
 
 | Feature set | Model | AP / PR-AUC | ROC-AUC | Precision | Recall | F1 | FP | FN | TP |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Phase 5 baseline | Logistic regression | 0.245 | 0.644 | 0.940 | 0.211 | 0.345 | 42 | 2,438 | 653 |
-| Phase 5 baseline | Histogram gradient boosting | 0.131 | 0.633 | 0.514 | 0.227 | 0.315 | 666 | 2,388 | 703 |
-| Behavioral, unlabeled | Logistic regression | 0.250 | 0.666 | 0.424 | 0.252 | 0.316 | 1,060 | 2,311 | 780 |
-| Behavioral, unlabeled | Histogram gradient boosting | 0.257 | 0.658 | 0.561 | 0.289 | 0.381 | 699 | 2,198 | 893 |
-| Behavioral, label history | Logistic regression | 0.823 | 0.984 | 0.821 | 0.754 | 0.787 | 507 | 759 | 2,332 |
-| Behavioral, label history | Histogram gradient boosting | 0.870 | 0.988 | 0.890 | 0.774 | 0.828 | 295 | 699 | 2,392 |
+| Baseline transaction/time features | Logistic regression | 0.245 | 0.644 | 0.940 | 0.211 | 0.345 | 42 | 2,438 | 653 |
+| Baseline transaction/time features | Histogram gradient boosting | 0.131 | 0.633 | 0.514 | 0.227 | 0.315 | 666 | 2,388 | 703 |
+| Past-only behavioral features | Logistic regression | 0.250 | 0.666 | 0.424 | 0.252 | 0.316 | 1,060 | 2,311 | 780 |
+| Past-only behavioral features | Histogram gradient boosting | 0.257 | 0.658 | 0.561 | 0.289 | 0.381 | 699 | 2,198 | 893 |
+| Past behavioral features + prior fraud-label history | Logistic regression | 0.823 | 0.984 | 0.821 | 0.754 | 0.787 | 507 | 759 | 2,332 |
+| Past behavioral features + prior fraud-label history | Histogram gradient boosting | 0.870 | 0.988 | 0.890 | 0.774 | 0.828 | 295 | 699 | 2,392 |
 | No-fraud prior | All feature sets | 0.009 | 0.500 | 0.000 | 0.000 | 0.000 | 0 | 3,091 | 0 |
 
 Accuracy is not reported as a main metric because the test fraud prevalence is only 0.896%. A no-fraud classifier would have high accuracy while detecting no fraud.
@@ -75,12 +75,12 @@ At a 0.5% alert budget on the test period (`k = 1,726`):
 
 | Feature set | Model | Fraud found | Precision@k | Recall@k |
 |---|---|---:|---:|---:|
-| Phase 5 baseline | Logistic regression | 713 | 0.413 | 0.231 |
-| Phase 5 baseline | Histogram gradient boosting | 711 | 0.412 | 0.230 |
-| Behavioral, unlabeled | Logistic regression | 772 | 0.447 | 0.250 |
-| Behavioral, unlabeled | Histogram gradient boosting | 913 | 0.529 | 0.295 |
-| Behavioral, label history | Logistic regression | 1,597 | 0.925 | 0.517 |
-| Behavioral, label history | Histogram gradient boosting | 1,666 | 0.965 | 0.539 |
+| Baseline transaction/time features | Logistic regression | 713 | 0.413 | 0.231 |
+| Baseline transaction/time features | Histogram gradient boosting | 711 | 0.412 | 0.230 |
+| Past-only behavioral features | Logistic regression | 772 | 0.447 | 0.250 |
+| Past-only behavioral features | Histogram gradient boosting | 913 | 0.529 | 0.295 |
+| Past behavioral features + prior fraud-label history | Logistic regression | 1,597 | 0.925 | 0.517 |
+| Past behavioral features + prior fraud-label history | Histogram gradient boosting | 1,666 | 0.965 | 0.539 |
 
 The ranking view confirms the same pattern: unlabeled behavioral histories help, while label histories dominate under the immediate-label assumption.
 

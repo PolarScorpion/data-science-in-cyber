@@ -20,17 +20,17 @@ Thresholds for logistic regression and histogram gradient boosting are selected 
 
 Average Precision, also interpreted as PR-AUC, is the main ranking metric because fraud prevalence in the test period is below 1%. Accuracy is misleading in this setting: a classifier that predicts every transaction as legitimate would be correct for more than 99% of test transactions while detecting no fraud.
 
-## Phase 5 and Phase 6 comparison
+## Baseline and behavioral-feature comparison
 
 | Feature set | Model | AP / PR-AUC | ROC-AUC | Precision | Recall | F1 | TP | FP | FN |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Phase 5 baseline | Logistic regression | 0.245 | 0.644 | 0.940 | 0.211 | 0.345 | 653 | 42 | 2,438 |
-| Phase 5 baseline | Histogram gradient boosting | 0.131 | 0.633 | 0.514 | 0.227 | 0.315 | 703 | 666 | 2,388 |
-| Phase 5 baseline | No-fraud prior | 0.009 | 0.500 | 0.000 | 0.000 | 0.000 | 0 | 0 | 3,091 |
-| Behavioral, unlabeled | Logistic regression | 0.250 | 0.666 | 0.424 | 0.252 | 0.316 | 780 | 1,060 | 2,311 |
-| Behavioral, unlabeled | Histogram gradient boosting | 0.257 | 0.658 | 0.561 | 0.289 | 0.381 | 893 | 699 | 2,198 |
-| Behavioral, label history | Logistic regression | 0.823 | 0.984 | 0.821 | 0.754 | 0.787 | 2,332 | 507 | 759 |
-| Behavioral, label history | Histogram gradient boosting | 0.870 | 0.988 | 0.890 | 0.774 | 0.828 | 2,392 | 295 | 699 |
+| Baseline transaction/time features | Logistic regression | 0.245 | 0.644 | 0.940 | 0.211 | 0.345 | 653 | 42 | 2,438 |
+| Baseline transaction/time features | Histogram gradient boosting | 0.131 | 0.633 | 0.514 | 0.227 | 0.315 | 703 | 666 | 2,388 |
+| Baseline transaction/time features | No-fraud prior | 0.009 | 0.500 | 0.000 | 0.000 | 0.000 | 0 | 0 | 3,091 |
+| Past-only behavioral features | Logistic regression | 0.250 | 0.666 | 0.424 | 0.252 | 0.316 | 780 | 1,060 | 2,311 |
+| Past-only behavioral features | Histogram gradient boosting | 0.257 | 0.658 | 0.561 | 0.289 | 0.381 | 893 | 699 | 2,198 |
+| Past behavioral features + prior fraud-label history | Logistic regression | 0.823 | 0.984 | 0.821 | 0.754 | 0.787 | 2,332 | 507 | 759 |
+| Past behavioral features + prior fraud-label history | Histogram gradient boosting | 0.870 | 0.988 | 0.890 | 0.774 | 0.828 | 2,392 | 295 | 699 |
 
 The unlabeled behavioral features produce a modest but credible improvement. For histogram gradient boosting, AP increases from 0.131 to 0.257 and recall increases from 0.227 to 0.289. This improvement comes from features that could plausibly be available at authorization time: prior counts, prior amounts, prior frequencies, time gaps, and customer-terminal interaction histories.
 
