@@ -24,8 +24,9 @@
 ## Checks passed
 
 - README includes project goal, dataset source, setup instructions, run
-  instructions, expected outputs, phase summary, main result table, project
-  structure, reports, and limitations.
+  instructions, expected outputs, implementation workflow summary, main result
+  table, project structure, reports, and limitations.
+- The required PDF report is included at `reports/final_report.pdf`.
 - Raw data are documented as local-only under `data/raw/simulated-data-raw/`.
 - Notebook headings are coherent and numbered from 1 through 42.
 - The notebook parses successfully.

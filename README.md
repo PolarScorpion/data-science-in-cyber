@@ -118,6 +118,7 @@ No fitted model binaries are required for the submitted analysis.
 - [Behavioral features](reports/behavioral_features.md)
 - [Final synthesis](reports/final_synthesis.md)
 - [Final report](reports/final_report.md)
+- [Final report PDF](reports/final_report.pdf)
 - [Final submission checklist](reports/final_submission_checklist.md)
 
 ## Repository structure
