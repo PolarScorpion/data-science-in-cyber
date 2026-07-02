@@ -4,10 +4,10 @@
 
 This project evaluates *Reproducible Machine Learning for Credit Card Fraud Detection - Practical Handbook* by Yann-Ael Le Borgne, Wissam Siblini, Bertrand Lebichot, and Gianluca Bontempi.
 
-- Official handbook: <https://fraud-detection-handbook.github.io/fraud-detection-handbook/>
-- Original GitHub repository: <https://github.com/Fraud-Detection-Handbook/fraud-detection-handbook>
-- Raw simulated dataset: <https://github.com/Fraud-Detection-Handbook/simulated-data-raw>
-- Public transformed dataset used by the modeling notebooks: <https://github.com/Fraud-Detection-Handbook/simulated-data-transformed>
+- Official handbook: [Fraud Detection Handbook](https://fraud-detection-handbook.github.io/fraud-detection-handbook/)
+- Original GitHub repository: [Fraud-Detection-Handbook](https://github.com/Fraud-Detection-Handbook/fraud-detection-handbook)
+- Raw simulated dataset: [simulated-data-raw](https://github.com/Fraud-Detection-Handbook/simulated-data-raw)
+- Public transformed dataset used by the modeling notebooks: [simulated-data-transformed](https://github.com/Fraud-Detection-Handbook/simulated-data-transformed)
 
 The reproducibility audit examined handbook revision `81cf7d1714bb7b2f5b496407d9055d91dc68dc25`, raw-data revision `6e67dbd0a3bfe0d7ec33abc4bce5f37cd4ff0d6a`, and transformed-data revision `6e3ca5849b4681430388056d3f1dcfb41d4e8269`. These identifiers make the reviewed source state explicit; they are not claims that later revisions are equivalent.
 

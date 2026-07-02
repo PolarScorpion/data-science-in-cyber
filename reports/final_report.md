@@ -16,10 +16,12 @@ The project does not prove real-world fraud-detection performance.
 
 ## Source and data
 
-The selected source is the Fraud Detection Handbook. The raw simulated
-transaction dataset is obtained separately from:
-
-<https://github.com/Fraud-Detection-Handbook/simulated-data-raw>
+The selected source is the
+[Fraud Detection Handbook](https://fraud-detection-handbook.github.io/fraud-detection-handbook/).
+The original implementation is the
+[Fraud-Detection-Handbook repository](https://github.com/Fraud-Detection-Handbook/fraud-detection-handbook).
+The raw simulated transaction dataset is obtained separately from
+[simulated-data-raw](https://github.com/Fraud-Detection-Handbook/simulated-data-raw).
 
 Raw data are not stored in this repository. The expected local placement is
 documented in [../data/README.md](../data/README.md).

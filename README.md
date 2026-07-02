@@ -16,9 +16,9 @@ The project does not claim production readiness or real-world fraud performance.
 ## Source and dataset
 
 - Selected source: [Reproducible Machine Learning for Credit Card Fraud Detection - Practical Handbook](https://fraud-detection-handbook.github.io/fraud-detection-handbook/)
-- Original handbook repository: <https://github.com/Fraud-Detection-Handbook/fraud-detection-handbook>
-- Raw simulated transactions: <https://github.com/Fraud-Detection-Handbook/simulated-data-raw>
-- Public transformed transactions used by the handbook notebooks: <https://github.com/Fraud-Detection-Handbook/simulated-data-transformed>
+- Original handbook repository: [Fraud-Detection-Handbook](https://github.com/Fraud-Detection-Handbook/fraud-detection-handbook)
+- Raw simulated transactions: [simulated-data-raw](https://github.com/Fraud-Detection-Handbook/simulated-data-raw)
+- Public transformed transactions used by the handbook notebooks: [simulated-data-transformed](https://github.com/Fraud-Detection-Handbook/simulated-data-transformed)
 
 The analysis is limited to the simulated-data portions of Chapters 3-5:
 transaction simulation, baseline modeling, temporal validation, performance
