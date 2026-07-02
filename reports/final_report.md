@@ -46,11 +46,11 @@ customer and terminal aggregates are not used.
 
 ## Main result
 
-| Feature set | Best model | AP / PR-AUC | ROC-AUC | Precision | Recall | F1 |
-|:---|:---|---:|---:|---:|---:|---:|
-| Baseline transaction/time features | Logistic regression | 0.245 | 0.644 | 0.940 | 0.211 | 0.345 |
-| Past-only behavioral features, no prior fraud labels | Histogram gradient boosting | 0.257 | 0.658 | 0.561 | 0.289 | 0.381 |
-| Past behavioral features + prior fraud-label history | Histogram gradient boosting | 0.870 | 0.988 | 0.890 | 0.774 | 0.828 |
+| Feature set                                          | Best model                  | AP / PR-AUC | ROC-AUC | Precision | Recall |    F1 |
+| :--------------------------------------------------- | :-------------------------- | ----------: | ------: | --------: | -----: | ----: |
+| Baseline transaction/time features                   | Logistic regression         |       0.245 |   0.644 |     0.940 |  0.211 | 0.345 |
+| Past-only behavioral features, no prior fraud labels | Histogram gradient boosting |       0.257 |   0.658 |     0.561 |  0.289 | 0.381 |
+| Past behavioral features + prior fraud-label history | Histogram gradient boosting |       0.870 |   0.988 |     0.890 |  0.774 | 0.828 |
 
 The conservative finding is that unlabeled behavioral histories provide a
 modest improvement. Prior-label histories provide much larger gains, but their
@@ -63,11 +63,11 @@ and alert-ranking behavior saved in the project result tables. The examples
 below are not new experiments; they interpret the observed false positives,
 false negatives, and alert volumes for the main feature sets.
 
-| Feature set | Best model | FP | FN | TP | Alerts |
-|:---|:---|---:|---:|---:|---:|
-| Baseline transaction/time features | Logistic regression | 42 | 2,438 | 653 | 695 |
-| Past-only behavioral features, no prior fraud labels | Histogram gradient boosting | 699 | 2,198 | 893 | 1,592 |
-| Past behavioral features + prior fraud-label history | Histogram gradient boosting | 295 | 699 | 2,392 | 2,687 |
+| Feature set                                          | Best model                  |  FP |    FN |    TP | Alerts |
+| :--------------------------------------------------- | :-------------------------- | --: | ----: | ----: | -----: |
+| Baseline transaction/time features                   | Logistic regression         |  42 | 2,438 |   653 |    695 |
+| Past-only behavioral features, no prior fraud labels | Histogram gradient boosting | 699 | 2,198 |   893 |  1,592 |
+| Past behavioral features + prior fraud-label history | Histogram gradient boosting | 295 |   699 | 2,392 |  2,687 |
 
 The baseline transaction/time model has AP / PR-AUC 0.245, precision 0.940,
 recall 0.211, and F1 0.345. It is conservative: it produces very few false
