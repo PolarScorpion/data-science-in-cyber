@@ -31,7 +31,7 @@ The final test period contains 345,144 transactions and 3,091 fraud cases, for
 because accuracy is misleading under this class imbalance.
 
 | Feature set | Best model | AP / PR-AUC | ROC-AUC | Precision | Recall | F1 |
-| --- | --- | ---: | ---: | ---: | ---: | ---: |
+|:---|:---|---:|---:|---:|---:|---:|
 | Baseline transaction/time features | Logistic regression | 0.245 | 0.644 | 0.940 | 0.211 | 0.345 |
 | Past-only behavioral features, no prior fraud labels | Histogram gradient boosting | 0.257 | 0.658 | 0.561 | 0.289 | 0.381 |
 | Past behavioral features + prior fraud-label history | Histogram gradient boosting | 0.870 | 0.988 | 0.890 | 0.774 | 0.828 |
@@ -99,7 +99,7 @@ No fitted model binaries are required for the submitted analysis.
 ## Implementation workflow summary
 
 | Phase | Output |
-| --- | --- |
+|:---|:---|
 | 1 | Repository scaffold and ignore rules |
 | 2 | Source selection and reproducibility audit |
 | 3 | Data loading and initial inspection |
