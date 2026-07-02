@@ -27,6 +27,9 @@
   instructions, expected outputs, implementation workflow summary, main result
   table, project structure, reports, and limitations.
 - The required PDF report is included at `reports/final_report.pdf`.
+- The required PDF report includes a concrete Error Analysis section with
+  false-positive, false-negative, FP/FN trade-off, and prior-label caveat
+  discussion.
 - Raw data are documented as local-only under `data/raw/simulated-data-raw/`.
 - Notebook headings are coherent and numbered from 1 through 42.
 - The notebook parses successfully.

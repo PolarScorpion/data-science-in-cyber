@@ -7,6 +7,7 @@ for metrics, caveats, and file references.
 
 from __future__ import annotations
 
+import csv
 from pathlib import Path
 from xml.sax.saxutils import escape
 
@@ -30,6 +31,7 @@ from reportlab.platypus import (
 ROOT = Path(__file__).resolve().parents[1]
 README = ROOT / "README.md"
 REPORTS = ROOT / "reports"
+RESULTS = ROOT / "results"
 OUTPUT = REPORTS / "final_report.pdf"
 
 GITHUB_BRANCH_URL = (
@@ -45,6 +47,28 @@ SOURCE_FILES = [
     "reports/baseline_modeling.md",
     "reports/eda_findings.md",
     "reports/reproducibility_audit.md",
+    "results/behavioral_test_metrics.csv",
+]
+
+ERROR_ANALYSIS_MODELS = [
+    (
+        "phase5_baseline",
+        "logistic_regression",
+        "Baseline transaction/time features",
+        "Logistic regression",
+    ),
+    (
+        "behavior_unlabeled",
+        "hist_gradient_boosting",
+        "Past-only behavioral features, no prior fraud labels",
+        "Histogram gradient boosting",
+    ),
+    (
+        "behavior_label_history",
+        "hist_gradient_boosting",
+        "Past behavioral features + prior fraud-label history",
+        "Histogram gradient boosting",
+    ),
 ]
 
 
@@ -70,6 +94,55 @@ def parse_table_after_heading(markdown: str, heading: str) -> list[list[str]]:
 
     if not rows:
         raise ValueError(f"No Markdown table found after heading: {heading}")
+    return rows
+
+
+def load_error_analysis_rows() -> list[list[str]]:
+    metrics_path = RESULTS / "behavioral_test_metrics.csv"
+    with metrics_path.open(newline="", encoding="utf-8") as handle:
+        records = list(csv.DictReader(handle))
+
+    rows = [
+        [
+            "Feature set",
+            "Best model",
+            "AP / PR-AUC",
+            "Precision",
+            "Recall",
+            "F1",
+            "FP",
+            "FN",
+            "TP",
+            "Alerts",
+        ]
+    ]
+    for feature_key, model_key, feature_label, model_label in ERROR_ANALYSIS_MODELS:
+        match = next(
+            (
+                record
+                for record in records
+                if record["feature_set"] == feature_key
+                and record["model"] == model_key
+                and record["split"] == "test"
+            ),
+            None,
+        )
+        if match is None:
+            raise ValueError(f"Missing saved metrics for {feature_key}/{model_key}")
+        rows.append(
+            [
+                feature_label,
+                model_label,
+                f"{float(match['average_precision']):.3f}",
+                f"{float(match['precision']):.3f}",
+                f"{float(match['recall']):.3f}",
+                f"{float(match['f1']):.3f}",
+                f"{int(match['false_positives']):,}",
+                f"{int(match['false_negatives']):,}",
+                f"{int(match['true_positives']):,}",
+                f"{int(match['alert_count']):,}",
+            ]
+        )
     return rows
 
 
@@ -138,6 +211,7 @@ def build_pdf() -> None:
     readme_text = read_text(README)
     main_result_rows = parse_table_after_heading(readme_text, "Main result")
     workflow_rows = parse_table_after_heading(readme_text, "Implementation workflow summary")
+    error_analysis_rows = load_error_analysis_rows()
 
     doc = SimpleDocTemplate(
         str(OUTPUT),
@@ -370,22 +444,80 @@ def build_pdf() -> None:
         )
     )
 
-    add_section(story, "6. Conclusions", styles)
+    add_section(story, "6. Error Analysis", styles)
     story.append(
         paragraph(
-            "The project supports three limited conclusions. First, chronological validation is "
-            "necessary for fraud data with time-dependent behavior. Second, precision-recall "
-            "metrics are more informative than accuracy when fraud prevalence is below 1%. Third, "
-            "past behavioral histories are useful, but the interpretation changes sharply when "
-            "features depend on prior known labels.",
+            "Error analysis is based on held-out chronological test-set confusion counts and "
+            "alert-ranking behavior saved in the project result tables. These examples interpret "
+            "the observed errors; they are not new model runs or additional experiments.",
+            styles["Body"],
+        )
+    )
+    story.append(
+        markdown_table(
+            error_analysis_rows,
+            styles["Small"],
+            [
+                2.35 * inch,
+                1.35 * inch,
+                0.68 * inch,
+                0.68 * inch,
+                0.60 * inch,
+                0.50 * inch,
+                0.48 * inch,
+                0.55 * inch,
+                0.55 * inch,
+                0.58 * inch,
+            ],
+        )
+    )
+    story.append(Spacer(1, 0.08 * inch))
+    story.append(
+        paragraph(
+            "False positives are legitimate transactions flagged as suspicious. They create "
+            "review cost, customer friction, and possible unnecessary declined or blocked "
+            "activity. A likely false-positive pattern is a legitimate transaction that looks "
+            "unusual in amount, timing, terminal behavior, or customer history.",
             styles["Body"],
         )
     )
     story.append(
         paragraph(
-            "The project does not prove real-world deployability. Delayed labels, calibration, "
-            "drift, alert-budgeting, review cost, privacy controls, and cost-sensitive thresholds "
-            "remain future work.",
+            "False negatives are fraudulent transactions missed by the detector. They imply "
+            "direct fraud loss, delayed intervention, and continued compromised customer or "
+            "terminal activity. A likely false-negative pattern is fraud that resembles normal "
+            "customer behavior or appears before enough behavioral history has accumulated.",
+            styles["Body"],
+        )
+    )
+    story.append(
+        paragraph(
+            "The baseline transaction/time model is conservative: AP / PR-AUC 0.245, precision "
+            "0.940, recall 0.211, and F1 0.345, with 42 false positives and 2,438 false "
+            "negatives. Past-only behavioral features improve AP / PR-AUC to 0.257, recall to "
+            "0.289, and F1 to 0.381, but precision falls to 0.561 and false positives rise to "
+            "699. Prior fraud-label history has the strongest test result, AP / PR-AUC 0.870, "
+            "precision 0.890, recall 0.774, and F1 0.828, but depends on timely known prior "
+            "labels.",
+            styles["Body"],
+        )
+    )
+    story.append(
+        paragraph(
+            "Prior-label features have specific possible failure modes. A first fraud in a new "
+            "pattern may occur before previous labels are known, producing false negatives. "
+            "Previous fraud history can also make later legitimate behavior look suspicious, "
+            "producing false positives. These are plausible operational patterns consistent "
+            "with the feature design, not proven real-world failure modes.",
+            styles["Body"],
+        )
+    )
+    story.append(
+        paragraph(
+            "The FP/FN trade-off is central: higher recall usually increases review burden, "
+            "while higher precision may miss more fraud. The best threshold depends on business "
+            "and security costs, not only F1. This project uses validation-set F1 thresholding "
+            "as a reproducible benchmark, not as a final deployment policy.",
             styles["Body"],
         )
     )
@@ -412,6 +544,24 @@ def build_pdf() -> None:
             "construction matter in fraud detection. The strongest model results are internally "
             "impressive but externally conditional, especially when they depend on prior fraud "
             "labels that may not be available at authorization time.",
+            styles["Body"],
+        )
+    )
+    story.append(
+        paragraph(
+            "The project supports three limited conclusions. First, chronological validation is "
+            "necessary for fraud data with time-dependent behavior. Second, precision-recall "
+            "metrics are more informative than accuracy when fraud prevalence is below 1%. Third, "
+            "past behavioral histories are useful, but the interpretation changes sharply when "
+            "features depend on prior known labels.",
+            styles["Body"],
+        )
+    )
+    story.append(
+        paragraph(
+            "The project does not prove real-world deployability. Delayed labels, calibration, "
+            "drift, alert-budgeting, review cost, privacy controls, and cost-sensitive thresholds "
+            "remain future work.",
             styles["Body"],
         )
     )
